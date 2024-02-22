@@ -64,6 +64,10 @@ on:
         options: 
         - 'yes'
         - 'no'
+      PATCH_TARBALL:
+        description: "Direct download link to your patches gz tarball"
+        required: false
+        default: ''
 
 jobs:
   test:
@@ -187,6 +191,14 @@ jobs:
         
         # Sync the repositories
         repo sync -c -j$(nproc --all) --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync  && \
+
+        # Apply patches to ROM source
+        curl -Lo patches.tar.gz ${{ github.event.inputs.PATCH_TARBALL }} && HAS_PATCHES=1 || HAS_PATCHES=0 && : \
+        if [ $HAS_PATCHES = "1" ]; then \
+            curl -LO https://raw.githubusercontent.com/TelegramAt25/renv/ritat/bin/fukP_apply \
+            tar -zxf patches.tar.gz \
+            bash ./fukP_apply patches/ \
+        fi \
         
         # Set up build environment
         export BUILD_USERNAME=${{ github.actor }} ; \
