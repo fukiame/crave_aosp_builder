@@ -20,34 +20,34 @@ on:
       BUILD_DIFFERENT_ROM:
         description: "Command to initialize a different 'repo' project:"
         required: false
-        default: "echo 'Build Starting!'"
+        default: "repo init --no-repo-verify -u https://github.com/HitoriAmeRP/platform_manifest.git -b android-12.1 -g default,-mips,-darwin,-notdefault --depth=1"
       REMOVALS:
         description: "Folders to be removed before syncing:"
         required: false
       LOCAL_MANIFEST:
         description: "Personal local manifest [repository or raw]:"
         required: true
-        default: 'https://github.com/sounddrill31/local_manifests'
+        default: 'https://github.com/TelegramAt25/local_manifests'
       LOCAL_MANIFEST_BRANCH:
         description: "Personal local manifest's branch:"
         required: false
-        default: 'lineage-oxygen'
+        default: 'selene_harp12'
       DEVICE_NAME:
         description: "Device's codename:"
         required: true
-        default: "oxygen"
+        default: "selene"
       PRODUCT_NAME:
         description: "Product to build:"
         required: true
-        default: "lineage_oxygen"
+        default: "twrp_selene"
       BUILD_COMMAND:
         description: 'Command to be used for compiling:'
         required: true
-        default: 'make recoveryimage'
+        default: 'mka bootimage'
       BUILD_TYPE:
         description: 'Type of build:'
         required: true
-        default: 'userdebug'
+        default: 'eng'
         type: choice
         options: 
         - 'eng'
