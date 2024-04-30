@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-name: TWRP Builder
+name: HARP
 on:
   workflow_dispatch:
     # Various inputs to simplify usage of workflow.
@@ -299,9 +299,11 @@ jobs:
            export CLEAN="clean"
         fi
 
+        echo "checkpoint 0"
         crave run --no-patch --${CLEAN} "rm -rf .repo/local_manifests/ ${{ github.event.inputs.REMOVALS }} && \
         # Clone local_manifests repository
         $BUILD_DIFFERENT_ROM ; \
+        echo "checkpoint 1" ; \
         git clone ${{ github.event.inputs.LOCAL_MANIFEST }} --depth 1 -b ${{ github.event.inputs.LOCAL_MANIFEST_BRANCH }} .repo/local_manifests && \
 
         if [ ! $? == 0 ]; then \
@@ -311,6 +313,7 @@ jobs:
 
         # Sync the repositories
         /opt/crave/resync.sh  && \
+        echo "checkpoint 2" ; \
 
         # Set up build environment
         export BUILD_USERNAME=${{ github.actor }} ; \
