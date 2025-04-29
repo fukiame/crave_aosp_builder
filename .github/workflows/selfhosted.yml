@@ -31,7 +31,7 @@ on:
       BUILD_DIFFERENT_ROM:
         description: "Command to initialize a different 'repo' project:"
         required: false
-        default: "epo init --no-repo-verify -u https://github.com/AxionAOSP/android -b lineage-22.2 -g default,-mips,-darwin,-notdefault --git-lfs"
+        default: "repo init --no-repo-verify -u https://github.com/AxionAOSP/android -b lineage-22.2 -g default,-mips,-darwin,-notdefault --git-lfs"
       REMOVALS:
         description: "Folders to be removed before syncing:"
         required: false
